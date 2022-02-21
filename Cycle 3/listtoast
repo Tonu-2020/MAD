@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/recvdinpt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="0dp"
+        android:layout_height="416dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.68" />
+
+java file
+package com.example.sjcet.listtoast;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+
+
+    public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
+        ListView lv;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            lv=(ListView)findViewById(R.id.listview);
+            String[] courses={"MCA","MBA","BBA","BCA"};
+            ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,courses);
+            lv.setAdapter(adapter);
+            // attach listener
+            lv.setOnItemClickListener(this);
+        }
+
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            String itemname=lv.getItemAtPosition(i).toString();
+            Toast.makeText(this,itemname,Toast.LENGTH_SHORT).show();
+        }
+
+    }
